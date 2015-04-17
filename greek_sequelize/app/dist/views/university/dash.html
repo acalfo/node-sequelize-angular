@@ -1,0 +1,54 @@
+<div class="container">
+	<h1>University Dash</h1>
+	<div class="col-sm-12" ng-cloak>
+		<div class="col-sm-12">
+			<h2>Assign Council Users</h2>
+			<form class="form" data-ng-submit="assignUser(assign)" novalidate>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<select class="form-control" ng-model="assign.councils_ids" multiple >
+								<option  ng-repeat="council in councils" ng-value="council.Councils_id">{{council.Councils_name}}</option>
+							</select>
+						</div>
+						<div class="col-xs-6">
+							<select class="form-control" ng-model="assign.users_ids" multiple >
+								<option  ng-repeat="user in chapterUsers" ng-value="user.Users_id">{{user.Users_firstname}} {{user.Users_lastname}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<input type="submit" class="btn btn-primary btn-block" value="Assign" > 
+						</div>
+					</div>
+				</div>
+			</form>
+			<form class="form" data-ng-submit="unassignUser(unassign)" novalidate>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<select class="form-control" ng-model="unassign.councils_ids" ng-change="getCouncilUsers(council.Councils_id);" multiple >
+								<option  ng-repeat="council in councils" ng-value="council.Councils_id">{{council.Councils_name}}</option>
+							</select>
+						</div>
+						<div class="col-xs-6">
+							<select class="form-control" ng-model="unassign.users_ids" multiple >
+								<option  ng-repeat="user in councilUsers" ng-value="user.Users_id">{{user.Users_firstname}} {{user.Users_lastname}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<input type="submit" class="btn btn-warning btn-block" value="Unassign" > 
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

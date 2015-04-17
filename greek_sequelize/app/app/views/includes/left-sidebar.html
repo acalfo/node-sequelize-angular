@@ -1,0 +1,27 @@
+<div ng-controller="NavigationController">
+	<ul id="sidebar" sticky-scroll="40">
+		<li ng-repeat="item in mainNavTabs"
+			ng-if="signedIn()"
+			ng-class="{ hasChild: (item.children!==undefined),
+					  active: item.selected,
+					  open: (item.children!==undefined) && item.open }"
+			ng-include="'views/templates/nav_renderer.html'"
+			></li>
+<!-- 		<li ng-if="subNavTabs.length" style="border-top:2px solid #333; height:2px"></li> -->
+		<li style="border-top:2px solid #ccc; height:2px"></li>
+		<li ng-repeat="item in subNavTabs"
+			ng-if="signedIn()"
+			ng-class="{ hasChild: (item.children!==undefined),
+					  active: item.selected,
+					  open: (item.children!==undefined) && item.open }"
+			ng-include="'views/templates/nav_renderer.html'"
+			></li>
+		<li ng-repeat="item in publicNavTabs"
+			ng-if="!signedIn()"
+			ng-class="{ hasChild: (item.children!==undefined),
+					  active: item.selected,
+					  open: (item.children!==undefined) && item.open }"
+			ng-include="'views/templates/nav_renderer.html'"
+			></li>
+	</ul>
+</div>

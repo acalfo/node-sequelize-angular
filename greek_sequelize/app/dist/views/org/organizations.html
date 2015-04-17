@@ -1,0 +1,32 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+
+		<li class="active">Organizations</li>
+	</ol>
+
+	<h1>Organizations</h1>
+
+</div>
+<div class="container">
+	<panel panel-class="panel-danger" heading="Organizations">
+		<table class="table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Organization</th>
+				<th>View</th>
+		
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="org in orgs">
+				<td><img ng-src="{{org.Orgs_crest}}" style="max-width:80px"/></td>
+				<td>{{org.Orgs_name}}</td>
+				<td><a class="btn btn-block btn-default" href="#/organizations/{{org.Orgs_id}}">View</a></td>
+				
+			</tr>
+		</tbody>
+	</table>
+	</panel>
+</div>

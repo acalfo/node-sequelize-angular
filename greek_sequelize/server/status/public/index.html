@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<title>Logger</title>
+		<meta charset="utf-8" />
+		<style>
+		#log_table{
+			table-layout:fixed;
+			width:100%;
+			border-collapse:collapse;
+		}
+		#log_table td, #log_table th{
+			border:1px solid black;
+		}
+		#log_table td{
+			vertical-align:bottom;
+		}
+		#log_table th{
+			padding:5px;
+			font-weight:bold;
+			text-align:center;
+			border-bottom:2px solid black;
+		}
+		.log_wrapper{
+			max-height:500px;
+			overflow:auto;
+			padding:5px;
+			word-wrap:break-word;
+			/*width:750px;*/
+		}
+		.log{
+			/*border-top:1px solid #ddd;
+			border-bottom:1px solid #ddd;*/
+		}
+		.log_time{
+			display:block;
+			text-align:center;
+			font-weight:bold;
+			color:#0a0;
+			border-bottom:1px solid #0a0;
+		}
+		.tab{
+			display:inline-block;
+			width:2em;
+		}
+		.date{
+			color:#00d;
+		}
+		</style>
+		<script src="https://cdn.socket.io/socket.io-1.0.6.js"></script>
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="moment.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				var socket = io.connect('http://greekrush-128756.usw1-2.nitrousbox.com:8080');
+				var timeTimeouts = {};
+				
+				function addLog(type, data){
+					var log_div = $('#' + type);
+					
+					var isAtBottom = log_div.scrollTop() == log_div.prop('scrollHeight') - log_div.outerHeight();
+					
+					log_div.append('<div class="log">' + data + '</div>');
+					
+					//if it was scrolled to the bottom before adding this log, keep automatically scrolling down and limit the number of logs
+					if(isAtBottom){
+						log_div.scrollTop(log_div.prop('scrollHeight'));
+						
+						//limit the number of logs shown
+						var maxLogs = 500;
+						var numLogs = log_div.find('.log').size();
+						if(numLogs > maxLogs){
+							log_div.find('.log:lt(' + (numLogs - maxLogs) + ')').remove();
+						}
+					}
+				}
+				
+				socket.on('new-data', function(data) {
+					var tab = '<span class="tab"></span>';
+					var logString = $('<div>').text(data.value).html();
+					
+					logString = logString.replace(/(\d+?\/\d+?\/\d+?\s\d+?:\d+?:\d+?\.\d+?\s)/g, '<span class="date">$1</span>');
+					logString = logString.replace(/\n/g, '<br />');
+					logString = logString.replace(/\t/g, tab);
+					logString = logString.replace(/    /g, tab);
+					logString = logString.replace(/\[32m\[/g, '[');		//not really sure what this is. maybe something to do with color?
+					logString = logString.replace(/\[33m\[/g, '[');		//not really sure what this is. maybe something to do with color?
+					logString = logString.replace(/\[39m/g, '');		//not really sure what this is. maybe something to do with color?
+					
+					addLog(data.type, logString);
+					
+					//add dates to the error log
+					if(data.type == 'nodemon_error_log'){
+						clearTimeout(timeTimeouts[data.type]);
+						timeTimeouts[data.type] = setTimeout(function(){
+							addLog(data.type, '<span class="log_time">' + moment().format('MM/DD/YYYY HH:mm:ss.SSS') + '</span> ');
+						}, 1000);
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<table id="log_table" cellspacing="0">
+			<tr>
+				<th style="width:50%">Log</th>
+				<th>Error Log</th>
+			</tr>
+			<tr>
+				<td><div class="log_wrapper" id="nodemon_log"></div></td>
+				<td><div class="log_wrapper" id="nodemon_error_log"></div></td>
+			</tr>
+		</table>
+	</body>
+</html>

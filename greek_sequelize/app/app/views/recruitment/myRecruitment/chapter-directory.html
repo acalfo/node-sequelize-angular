@@ -1,0 +1,31 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/myRecruitment/dash">myRecruitment</a></li>
+		<li class="active">Chapter Directory</li>
+	</ol>
+
+	<h1>Chapter Directory</h1>
+
+</div>
+<div class="container">
+	<panel panel-class="panel-danger" heading="Chapter Recruitment Profiles">
+		<div class="col-sm-4" ng-repeat="chapter in chapters">
+			<div class="col-sm-4">
+				<img ng-if="chapter.Orgs_crest!==''" class=" center-block" ng-src="{{chapter.Orgs_crest}}" style="max-width:100%; max-height:100px">
+				<img ng-if="chapter.Orgs_crest===''" class=" center-block" src="https://s3-us-west-1.amazonaws.com/greekrush-dev/greekrush-src/small-logo.jpeg" style="max-width:100%; max-height:100px">
+			</div>
+			<div class="col-sm-8">
+				<div class="caption">
+					<small>
+						<span ng-bind="chapter.Orgs_name"></span><br />
+						<span ng-bind="chapter.Chapters_name"></span><br/>
+						<a class="btn btn-xs btn-info" href="#/myRecruitment/chapter-directory/{{chapter.ChapterRecruitments_id}}">
+							View <i class="fa fa-home"></i>
+						</a>
+					</small>
+				</div>
+			</div>
+		</div>
+	</panel>
+</div>
+

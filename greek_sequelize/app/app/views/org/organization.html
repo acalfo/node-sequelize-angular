@@ -1,0 +1,89 @@
+<!-- <div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/home">Dashboard</a></li>
+		<li><a href="#/universities">Organizations</a></li>
+		<li class="active">{{org.Orgs_name}}</li>
+	</ol>
+
+	<h1>{{org.Orgs_name}}</h1>
+
+</div> -->
+<div class="container">
+	<panel panel-class="panel-danger" >
+		<div class="col-xs-12" style="margin-bottom:15px;">
+			<div class="col-xs-12 col-sm-5">
+				<img style="width:100%; max-width:300px" ng-src="{{org.Orgs_crest}}">
+			</div>
+			<div class="col-xs-12 col-sm-7">
+
+				<h2>{{org.Orgs_name}} <h1 ng-bind-html="org.Orgs_ascii"></h1></h2>
+			</div>
+		</div>
+		<br />
+		<div class="col-xs-12">
+			<div class="col-sm-12"><accordion  close-others="false" class="panel-danger">
+				<accordion-group is-open="chapterAccordionOpen">
+					<accordion-heading>
+						Chapters
+					</accordion-heading>
+					<table class="table" style="background-color:#fff;">
+						<!-- 					<thead>
+<tr>
+<th>University</th>
+<th>Chapter</th>
+<th>Profile</th>
+</tr>
+</thead> -->
+						<tbody>
+							<tr ng-repeat="chapter in chapters">
+								<td><img ng-src="{{chapter.Universities_logo}}" style="max-width:80px"/></td>
+								<td><strong>{{chapter.Universities_name}}</strong><br/><small>{{chapter.Chapters_name}}</small></td>
+								<td><a class="btn btn-block btn-default" href="#/organizations/{{chapter.Orgs_name}}/{{chapter.Chapters_name}}">View</a></td>
+
+							</tr>
+						</tbody>
+					</table>
+				</accordion-group>
+			</div>
+		</div>
+	</panel>
+</div>
+
+<!-- <div class="container org-prof" ng-init="getOrg()">
+<div class="col-xs-12">
+<div class="col-xs-12">
+<img class="crest" ng-src="{{org.Orgs_crest}}">
+</div>
+<div class="col-xs-12">
+<h2 ng-bind="org.Orgs_name">Name</h2>
+</div>
+{{followers.length}}
+<table class="table" style="background-color:#fff;" ng-init="getOrgChapters()">
+<thead>
+<tr>
+<th>#</th>
+<th>Chapter | University</th>
+<th>Profiles</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="chapter in chapters">
+<td><img ng-src="{{chapter.Universities_logo}}" style="max-width:80px"/></td>
+<td><strong>{{chapter.Chapters_name}}</strong><br/><small>{{chapter.Universities_name}}</small></td>
+<td><a class="btn btn-block btn-default" href="#/{{chapter.Orgs_name}}/{{chapter.Chapters_name}}">View</a></td>
+<td width="209" data-ng-hide="following[chapter.Chapters_id]">
+<a class="btn btn-block btn-default"  data-ng-click="followChapter(chapter.Chapters_id)">
+Follow
+</a>
+</td>
+<td width="209" data-ng-show="following[chapter.Chapters_id]" > 
+<a class="btn btn-block btn-default"  data-ng-click="unfollowChapter(chapter.Chapters_id)">
+UnFollow
+</a>
+</td>
+
+</tr>
+</tbody>
+</table>
+</div>
+</div> -->

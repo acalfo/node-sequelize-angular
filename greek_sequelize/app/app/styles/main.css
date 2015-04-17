@@ -1,0 +1,226 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+
+th{
+	font-weight:bold;
+	font-size:1.2em;
+	color:#4f545e;
+}
+
+.navbar-brand{
+	margin-left:20px;
+}
+
+/** START color scheme updates **/
+.navbar-inverse{
+	background-color:#BF5700;
+	border-color:#934200;
+}
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus{
+	background-color:#934200;
+}
+header #leftmenu-trigger{
+	border-color:#964300
+}
+#page-leftbar, #page-container, #sidebar ul, #sidebar ul li a{
+/* 	background:#A5CCB1; */
+	background:#eee;
+	color:#000;
+}
+#sidebar li a, #sidebar li a i, #sidebar ul li i, #sidebar li.active i{
+	color:#000;
+}
+#sidebar ul li.active > a, #sidebar ul li.active > a > i{
+	color:#000 !important;
+}
+
+#sidebar li a:hover, #sidebar li a:hover i, #sidebar > li.active > a, #sidebar > li.active > a i{
+	color:#fff;
+}
+#sidebar li > a:hover{
+	background:#7ab1f4;
+}
+#sidebar > li.active > a{
+	background:#3E7DCA;
+}
+
+@media (max-width: 480px){
+	ul.toolbar{
+		background:#ddd;
+	}
+	.navbar-inverse .navbar-nav > li > a{
+		color:#000;
+	}
+}
+
+/* bootstrap colors */
+.panel-danger .panel-heading{
+	background-color:#A9483E;
+}
+/** END color scheme updates **/
+
+#page-container{
+	margin-top:40px;
+}
+
+.form-foot{
+	width:100%;
+	text-align:center;
+	margin-bottom: 3px;
+}
+/*
+.animate-switch-container {
+	position:relative;
+
+
+	height:62vh;
+	width:100%;
+	overflow:hidden;
+}
+.animate-switch-container .row{
+	margin-left:0px;
+	margin-right:0px;
+}
+*/
+
+@media (max-width: 768px){
+/* 	.form-group {
+		margin-bottom:0;
+	} */
+	.form-group .col-sm-6 {
+		float:none;
+		margin-bottom:20px;
+	}
+	
+	.table > thead > tr > th,
+	.table > tbody > tr > th,
+	.table > tfoot > tr > th,
+	.table > thead > tr > td,
+	.table > tbody > tr > td,
+	.table > tfoot > tr > td{
+		padding:4px 7px;
+	}
+}
+
+.animate-switch-container {
+	position:relative;
+
+
+	height:62vh;
+	width:100%;
+	overflow:hidden;
+}
+.animate-switch-container .row{
+	margin-left:0px;
+	margin-right:0px;
+}
+
+.form-section{
+	height:100%;
+	width:100%;
+	background:white;
+	overflow:auto;
+}
+.animate-switch {
+	padding:10px;
+}
+
+.form-section.ng-animate {
+	-webkit-transition-duration: 0.8s; /* Safari */
+	transition-duration: 0.8s;
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+}
+
+
+.form-section.ng-enter {
+	right:-100%;
+}
+.form-section.ng-leave,
+.form-section.ng-enter.ng-enter-active {
+	right:0;
+}
+
+.form-section.ng-leave.ng-leave-active{
+	left:-100%;
+}
+
+.center-block{
+	float:none;
+}
+
+.container{
+	/*max-width:900px;*/
+}
+
+.container.about{
+	background: url("https://s3-us-west-1.amazonaws.com/greekrush.com/site-images/rawls-high-blank.jpg") no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+.container.about .subcontainer{
+	font-size:1.2em;
+	padding:20px;
+}
+.container.about .text{
+	padding: 20px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	margin-bottom: 30px;
+	background: #ffffff;
+	background: rgba(255, 255, 255, 0.9);
+}
+.container.about .info{
+	text-align:center;
+}
+.container.about .span4{
+	width:300px;
+	float:left;
+	margin-left:20px;
+}
+.container.about .one{
+	background-color: rgba(189, 46, 49,1.0);
+}
+.container.about .two{
+	background-color: rgba(117, 188, 69,1.0);
+}
+.container.about .three{
+	background-color: rgba(52, 152, 219,1.0);
+}
+.container.about .icon {
+	text-align: center;
+	border-radius: 50%;
+	height: 115px;
+	width: 115px;
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: bottom;
+	margin-bottom: 4px;
+}
+.container.about .icon i {
+	padding-top: 20%;
+	color: #fff;
+}
+.container.about .fa-5x {
+	font-size: 4.5em;
+}
+.container.about .logo-image{
+	width:45%;
+}
+.container.about h1{
+	font-size:38px;
+}
+
+
+@media (max-width:767px){
+	#page-content{
+		margin-top:40px;
+	}
+}

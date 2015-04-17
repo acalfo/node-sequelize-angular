@@ -1,0 +1,62 @@
+
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/home">Dashboard</a></li>
+		<li><a href="#/universities">Universities</a></li>
+		<li class="active">{{university.Universities_name}}</li>
+	</ol>
+
+	<h1>{{university.Universities_name}}</h1>
+
+</div>
+<div class="container">
+	<panel panel-class="panel-danger" >
+		<div class="col-xs-12" style="margin-bottom:15px;">
+			<div class="col-xs-12 col-sm-5">
+				<img style="width:100%;" ng-src="{{university.Universities_logo}}">
+			</div>
+			<div class="col-xs-12 col-sm-7">
+				<h2 ng-bind="university.Universities_name">Name</h2>
+			</div>
+		</div>
+		<br />
+		<div class="col-xs-12">
+			<div class="col-sm-12">
+				<accordion  close-others="false" class="panel-danger">
+				<accordion-group is-open="status.one">
+					<accordion-heading>
+						Fraternities
+					</accordion-heading>
+					<table class="table" style="background-color:#fff;">
+					
+					
+						<tr ng-repeat="chapter in chapters " ng-if="chapter.Orgs_gender==='male'">
+							<td><img ng-src="{{chapter.Orgs_crest}}" style="max-width:80px"/></td>
+							<td><strong>{{chapter.Orgs_name}}</strong><br/><small>{{chapter.Chapters_name}}</small></td>
+							<td><a class="btn btn-block btn-default" href="#/organizations/{{chapter.Orgs_name}}/{{chapter.Chapters_name}}">View</a></td>
+						</tr>
+					
+				</table>
+					
+				</accordion-group>
+				<accordion-group is-open="status.two">
+					<accordion-heading>
+						Sororities
+					</accordion-heading>
+					<table class="table" style="background-color:#fff;">
+					
+						<tr ng-repeat="chapter in chapters " ng-if="chapter.Orgs_gender==='female'">
+							<td><img ng-src="{{chapter.Orgs_crest}}" style="max-width:80px"/></td>
+							<td><strong>{{chapter.Orgs_name}}</strong><br/><small>{{chapter.Chapters_name}}</small></td>
+							<td><a class="btn btn-block btn-default" href="#/organizations/{{chapter.Orgs_name}}/{{chapter.Chapters_name}}">View</a></td>
+						</tr>
+					
+				</table>
+					
+				</accordion-group>
+			</accordion>
+				
+			</div>
+		</div>
+	</panel>
+</div>

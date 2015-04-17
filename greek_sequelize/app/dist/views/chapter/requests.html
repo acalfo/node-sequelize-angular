@@ -1,0 +1,125 @@
+
+
+<div class="container">
+
+			<tabset panel-tabs="true" panel-class="panel panel-midnightblue" heading="Chapter Requests">
+				<tab heading="Pending ">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Phone #</th>
+								<th>Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="request in chapterRequests" ng-if="request.ChapterRequests_status ==='pending'">
+								<td>
+									
+								</td>
+								<td>
+									<span ng-bind="request.Users_firstname+' '+request.Users_lastname">Name</span>
+								</td>
+								<td>
+									<span ng-bind="request.Users_email">Email</span>
+								</td>
+								<td>
+									<span ng-bind="request.Users_phone">Phone</span>
+								</td>
+								<td>
+									<span ng-bind="request.ChapterRequests_updated | date">Requested</span>
+								</td>
+								<td>
+									<a class="btn btn-success btn-xs" ng-click="approve(request.ChapterRequests_id)">
+										<i class="fa fa-thumbs-up"></i></a>
+									<a class="btn btn-danger btn-xs" ng-click="deny(request.ChapterRequests_id)">
+										<i class="fa fa-thumbs-down"></i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</tab>
+				<tab heading="Approved">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Phone #</th>
+								<th>Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="request in chapterRequests" ng-if="request.ChapterRequests_status ==='approved'">
+								<td>
+									
+								</td>
+								<td>
+									<span ng-bind="request.Users_firstname+' '+request.Users_lastname">Name</span>
+								</td>
+								<td>
+									<span ng-bind="request.Users_email">Email</span>
+								</td>
+								<td>
+									<span ng-bind="request.Users_phone">Phone</span>
+								</td>
+								<td>
+									<span ng-bind="request.ChapterRequests_updated | date">Requested</span>
+								</td>
+								<td>
+									<a class="btn btn-success btn-xs" ng-click="approve(request.ChapterRequests_id)">
+										<i class="fa fa-thumbs-up"></i></a>
+									<a class="btn btn-danger btn-xs" ng-click="deny(request.ChapterRequests_id)">
+										<i class="fa fa-thumbs-down"></i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</tab>
+				<tab heading="Denied">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Phone #</th>
+								<th>Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="request in chapterRequests" ng-if="request.ChapterRequests_status ==='rejected'">
+								<td>
+									
+								</td>
+								<td>
+									<span ng-bind="request.Users_firstname+' '+request.Users_lastname">Name</span>
+								</td>
+								<td>
+									<span ng-bind="request.Users_email">Email</span>
+								</td>
+								<td>
+									<span ng-bind="request.Users_phone">Phone</span>
+								</td>
+								<td>
+									<span ng-bind="request.ChapterRequests_updated | date">Requested</span>
+								</td>
+								<td>
+									<a class="btn btn-success btn-xs" ng-click="approve(request.ChapterRequests_id)">
+										<i class="fa fa-thumbs-up"></i></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</tab>
+			</tabset>
+
+</div>

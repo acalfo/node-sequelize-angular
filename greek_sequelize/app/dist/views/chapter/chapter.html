@@ -1,0 +1,110 @@
+<div class="container">
+	<panel panel-class="panel-danger" heading="{{chapter.Orgs_name+' | '+chapter.Chapters_name+' Chapter'}}">
+		<div class="col-xs-12 col-sm-6">
+			<img style="max-width:100%" class="thumbnail" ng-src="{{chapter.Orgs_crest}}">
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<div class="row">
+				<div class="col-md-4  col-sm-6" ng-repeat="tile in tiles">
+					<tile-mini data="tile"></tile-mini>
+				</div>
+			</div>
+			<div class="row">
+				<a ng-if="!following[chapter.Chapters_id]" class="btn btn-xs btn-orange" ng-click="follow()">Follow <i class="fa fa-star-o"></i></a>
+				<a ng-if="following[chapter.Chapters_id]" class="btn btn-xs btn-orange active" ng-click="unfollow()">Following <i class="fa fa-star"></i></a>
+			</div>
+		</div>
+
+		<div class="col-xs-12 col-sm-12 ">
+			<tabset tab-theme="danger" tab-position="top">
+				<tab heading="Details">
+					<div class="table-responsive">
+						<table class="table table-condensed">
+							<tbody>
+								<tr>
+									<td>Moto</td>
+									<td>Give, Expecting Nothing Thereof</td>
+								</tr>
+								<tr>
+									<td>Founded</td>
+									<td>April 29th, 1959</td>
+								</tr>
+								<tr>
+									<td>Chapter President</td>
+									<td>Elliot Ashworth</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</tab>
+				<tab>
+					<tab-heading>
+						History
+					</tab-heading>
+					<p>Because of the dramatic expansion of fraternities following World War II, it became increasingly evident that to stay competitive the 2 fraternities with such similar ideals should combine. By 1957, TKP and PK had a total of 58 active chapters on 54 campuses. Committees from each group hashed out issues such as the national name and local chapter names, coat of arms, ritual, magazine, constitution, leadership and a host of other issues that had kept the groups divided. Loyalty and fervor were surmounted and the merger was approved at a special convention held at Ohio State in 1958. The official charter day chosen was April 29, 1959. Its first biennial convention was held in 1961 and first national management school in 1965. The first chapter chartered under the new name was at Belmont Abbey.</p>
+				</tab>
+				<tab>
+					<tab-heading>
+						Nationals
+					</tab-heading>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor et sem et pellentesque. 
+						Curabitur ut rhoncus dui, vel condimentum lacus. Aliquam dui mi, viverra nec cursus nec, 
+						bibendum ut arcu. Praesent gravida, arcu sed faucibus efficitur, lorem sapien faucibus urna, 
+						a aliquet ligula dui vel sapien. Sed congue hendrerit.</p>
+				</tab>
+				<tab>
+					<tab-heading>
+						Here
+					</tab-heading>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor et sem et pellentesque.
+						Curabitur ut rhoncus dui, vel condimentum lacus. Aliquam dui mi, viverra nec cursus nec, 
+						bibendum ut arcu. Praesent gravida, arcu sed faucibus efficitur, lorem sapien faucibus urna, 
+						a aliquet ligula dui vel sapien. Sed congue hendrerit.</p>
+				</tab>
+			</tabset>
+		</div>
+	</panel>
+	<panel panel-class="panel-danger" heading="Up Coming Events">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Event</th>
+					<th>When</th>
+					<th>Where</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						Vistas BBQ
+					</td>
+					<td>
+						09/18/14 5:00PM
+					</td>
+					<td>
+						Come out to grab some good food and meet some of the guys!
+					</td>
+					<td>
+						<a class="btn btn-info" >Details</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Driving Range
+					</td>
+					<td>
+						09/19/14 6:30PM
+					</td>
+					<td>
+						Time to hit the range and work on the swing!
+					</td>
+					<td>
+						<a class="btn btn-info" >Details</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</panel>
+	
+</div>

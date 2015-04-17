@@ -1,0 +1,126 @@
+
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/home">Dashboard</a></li>
+		<li class="active">myCampus</li>
+	</ol>
+
+	<h1>myCampus</h1>
+
+</div>
+<div class="container">
+	<div class="col-sm-6 col-md-6">
+		<panel panel-class="panel-danger" heading="{{university.Universities_name}}">
+			<div class="col-xs-12" style="margin-bottom:15px;">
+				<div class="col-xs-12 col-sm-5">
+					<img style="width:100%; max-width:300px" ng-src="{{university.Universities_logo}}">
+				</div>
+				<div class="col-xs-12 col-sm-7">
+					<h2 ng-bind="university.Universities_name">Name</h2>
+				</div>
+			</div>
+
+
+		</panel>
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-6">
+		
+				<accordion  close-others="false" class="panel-danger">
+
+					<accordion-group is-open="status.one">
+						<accordion-heading>
+							Fraternities
+						</accordion-heading>
+						<table class="table" style="background-color:#fff;">
+							<tr ng-repeat="chapter in chapters " ng-if="chapter.Orgs_gender==='male'">
+								<td><img ng-src="{{chapter.Orgs_crest}}" style="max-width:80px"/></td>
+								<td><strong>{{chapter.Orgs_name}}</strong><br/><small>{{chapter.Chapters_name}}</small></td>
+								<td><a class="btn btn-block btn-default" href="#/organizations/{{chapter.Orgs_name}}/{{chapter.Chapters_name}}">View</a></td>
+							</tr>
+						</table>
+					</accordion-group>
+
+					<accordion-group is-open="status.two">
+						<accordion-heading>
+							Sororities
+						</accordion-heading>
+						<table class="table" style="background-color:#fff;">
+							<tr ng-repeat="chapter in chapters " ng-if="chapter.Orgs_gender==='female'">
+								<td><img ng-src="{{chapter.Orgs_crest}}" style="max-width:80px"/></td>
+								<td><strong>{{chapter.Orgs_name}}</strong><br/><small>{{chapter.Chapters_name}}</small></td>
+								<td><a class="btn btn-block btn-default" href="#/organizations/{{chapter.Orgs_name}}/{{chapter.Chapters_name}}">View</a></td>
+							</tr>
+						</table>
+					</accordion-group>
+
+					<accordion-group is-open="status.three">
+						<accordion-heading>
+							Recruitment
+						</accordion-heading>
+						<div class="row">
+							<div class="col-sm-12">
+							<dl class="dl-horizontal">
+								<dt>Sign Up Start Date:</dt>
+								<dd ng-bind="selected.Recruitments_startSignUp"></dd>
+								<dt>Sign Up End Date:</dt>
+								<dd ng-bind="selected.Recruitments_endSignUp"></dd>
+								<dt>Recruitment Start Date:</dt>
+								<dd ng-bind="selected.Recruitments_start"></dd>
+
+								<dt>Recruitment End Date:</dt>
+								<dd ng-bind="selected.Recruitments_end"></dd>
+
+								<dt ng-if="selected.recs.requirements.length>0">
+									Other Requirements:
+								</dt>
+								<dd>
+									<span ng-repeat="rec in selected.recs.requirements ">
+										<b ng-if="rec.key==='gpa'">Minimum GPA : </b>
+										<b ng-if="rec.key==='units'">Minimum Completed Units (Non-Transfer Student) : </b>
+										<b ng-if="rec.key==='unitsTransfer'">Minimum Completed Units (Transfer Student) : </b>
+										<span ng-if="edit!==true" ng-bind="rec.value"></span>
+										<br />
+									</span>
+								</dd>
+								<dt ng-if="selected.recs.otherInfo.length>0">Other Requested Info:</dt>
+								<dd>
+									<span ng-repeat="rec in selected.recs.otherInfo">
+										<b ng-if="rec.key==='studentId'">Student ID#  </b>
+										ex: {{rec.value}} <a ng-if="edit===true" class="btn btn-xs btn-danger" ng-click="removeRec($index , selected.recs.otherInfo)">Remove <i class="fa fa-times"></i></a><br />
+									</span>
+								</dd>
+								<dt ng-if="selected.recs.otherTerms.length>0">Liability and <br />Terms Agreements:</dt>
+								<dd>
+									<span ng-repeat="rec in selected.recs.otherTerms">
+										<span>
+											<b><a ng-click="showTerms(rec)">{{rec.key}} : </a></b>
+										</span>
+									</span>
+								</dd>
+							</dl>
+						</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6 col-sm-12 col-xs-12 center-block" ng-if="currentUser.Orgs_id === 1 || currentUser.Orgs_id ===2">
+								<a class="btn btn-primary btn-block" 
+								   [ng-if="selected.recs.otherTerms.length<1 || selected.recs.requirements.length<1 || selected.recs.otherInfo.length<1"]
+								   ng-class="active"
+								   ng-click="joinRecruitment(selected)">
+									<b>{{buttonMsg}}</b>
+								</a>
+								<!-- 					<a class="btn btn-primary btn-block" 
+	ng-if="selected.recs.otherTerms.length>0 || selected.recs.requirements.length>0 || selected.recs.otherInfo.length>0"
+	ng-class="active" 
+	ng-init="isOpen(selected.Recruitments_startSignUp , selected.Recruitments_endSignUp)"
+	href="#/myCampus/join-recruitment">
+	<b ng-bind="buttonMsg">Sign Up For Recruitment</b>
+	</a> -->
+							</div>
+						</div>
+					</accordion-group>
+				</accordion>
+
+			</div>
+		
+</div>
+

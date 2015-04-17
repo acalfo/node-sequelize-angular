@@ -1,0 +1,40 @@
+<!-- <div id="page-heading">
+<ol class="breadcrumb">
+<li><a href="#/">Dashboard</a></li>
+
+<li class="active">Organizations</li>
+</ol>
+
+<h1>Organizations</h1>
+
+</div> -->
+<div class="container">
+	<div class="col-sm-12 col-md-6">
+		<panel panel-class="panel-danger" heading="Fraternities">
+			<table class="table">
+				<tbody>
+					<tr ng-repeat="org in fraternities" >
+						<td><img ng-src="{{org.Orgs_crest}}" style="max-width:80px"/></td>
+						<td>{{org.Orgs_name}}</td>
+						<td><a class="btn btn-block btn-default" href="#/organizations/{{org.Orgs_id}}">View</a></td>
+
+					</tr>
+				</tbody>
+			</table>
+		</panel>
+	</div>
+	<div class="col-sm-12 col-md-6">
+		<panel panel-class="panel-danger" heading="Sororities">
+			<table class="table">
+				<tbody>
+					<tr ng-repeat="org in sororities">
+						<td><img ng-src="{{org.Orgs_crest}}" style="max-width:80px"/></td>
+						<td>{{org.Orgs_name}}</td>
+						<td><a class="btn btn-block btn-default" href="#/organizations/{{org.Orgs_id}}">View</a></td>
+
+					</tr>
+				</tbody>
+			</table>
+		</panel>
+	</div>
+</div>

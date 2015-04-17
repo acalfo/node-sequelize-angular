@@ -1,0 +1,484 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li class="active"><span ng-bind="currentUser.Councils_name">Recruitment Dash</span> Recruitment Dash</li>
+	</ol>
+
+	<h1><span ng-bind="currentUser.Councils_id"></span> Recruitment Dash</h1>
+
+</div>
+<div class="container">
+
+	<panel panel-class="panel-danger" heading="Create New Recruitment">
+		<panel-controls>
+			<a href=""><panel-control-collapse class="fa fa-chevron-down"></panel-control-collapse></a>
+		</panel-controls>
+		<form ng-submit="createRecruitment()" class="form">
+			<accordion close-others="oneAtATime" class="panel-danger">
+				<accordion-group is-open="status.isFirstOpen">
+					<accordion-heading>
+						Dates: <span class="text-danger small">Required</span>
+					</accordion-heading>
+					<div ng-if="councils.length > 1">
+						<select ng-model="myColor" ng-options="council.Councils_name for council in councils">
+							<option value="">-- Choose Council --</option>
+						</select>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Start: </label>
+							<input type="date" class="form-control" ng-model="newRecruitment.Recruitments_start">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>End: </label>
+							<input type="date" class="form-control" ng-model="newRecruitment.Recruitments_end">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Signup Start: </label>
+							<input type="date" class="form-control" ng-model="newRecruitment.Recruitments_startSignUp">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Signup End: </label>
+							<input type="date" class="form-control" ng-model="newRecruitment.Recruitments_endSignUp">
+						</div>
+					</div>
+				</accordion-group>
+				<accordion-group >
+					<accordion-heading>
+						Requirements: <span class="text-info small">Optional</span>
+					</accordion-heading>
+					<div class="row">
+						<div class="col-sm-12" ng-if="requirements.length < 1">
+							<h3 >None</h3>
+						</div>
+						<div class="col-sm-12" ng-if="requirements.length >= 1">
+							<dl class="dl-horizontal" ng-repeat="rec in requirements">
+								<dt ng-if="rec.key==='gpa'">Minimum GPA</dt>
+								<dt ng-if="rec.key==='units'">Minimum Completed Units (Non-Transfer Student)</dt>
+								<dt ng-if="rec.key==='unitsTransfer'">Minimum Completed Units (Transfer Student)</dt>
+								<dd ng-bind="rec.value"></dd>
+							</dl>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<a ng-click="addNew(recs)" class="btn btn-default">Add New Requirement</a>
+						</div>
+						<div class="col-sm-6">
+						</div>
+					</div>
+					<div class="row" ng-repeat="rec in recs">
+						<div class="col-sm-5">
+							<div class="form-group">
+								<label>Type of Requirement:</label>
+								<select ng-model="rec.key" class="form-control">
+									<option value="gpa">Minimum GPA</option>
+									<option value="units">Minimum Units Completed (Non Transfer)</option>
+									<option value="unitsTransfer">Minimum Units Completed (Transfer)</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<div class="form-group">
+								<label>Minimum Value</label>
+								<input type="text" class="form-control" ng-model="rec.value">
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<a class="btn btn-success btn-sm disabled" ng-if="rec.value==='' || rec.key===''">Save</a>
+							<a class="btn btn-success btn-sm" ng-click="moveTo(rec , recs, requirements)" ng-if="rec.value!=='' && rec.key!==''">Save</a>
+						</div>
+					</div>
+				</accordion-group>
+				<accordion-group >
+					<accordion-heading>
+						Additional User Info: <span class="text-info small">Optional</span>
+					</accordion-heading>
+					<div class="row">
+						<div class="col-sm-12" ng-if="otherInfo.length < 1">
+							<h3 >None</h3>
+						</div>
+						<div class="col-sm-12" ng-if="otherInfo.length >= 1">
+							<dl class="dl-horizontal" ng-repeat="info in otherInfo">
+								<dt ng-if="info.key==='studentId'">Student ID#</dt>
+								<dd><span class="muted">ex : <span  ng-bind="info.value"></span></span></dd>
+							</dl>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<a ng-click="addNew(infos)" class="btn btn-default">Additional Form Field</a>
+						</div>
+						<div class="col-sm-6">
+						</div>
+					</div>
+					<div class="row" ng-repeat="info in infos">
+						<div class="col-sm-5">
+							<div class="form-group">
+								<label>Information Field:</label>
+								<select ng-model="info.key" class="form-control">
+									<option value="studentId">Student ID#</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<div class="form-group">
+								<label>Example Value:</label>
+								<input type="text" class="form-control" ng-model="info.value">
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<a class="btn btn-success btn-sm disabled" ng-if="info.value==='' || info.key===''">Save</a>
+							<a class="btn btn-success btn-sm" ng-click="moveTo(info , infos, otherInfo)" ng-if="info.value!=='' && info.key!==''">Save</a>
+						</div>
+					</div>
+				</accordion-group>
+				<accordion-group >
+					<accordion-heading>
+						Include Terms: <span class="text-info small">Optional</span>
+					</accordion-heading>
+					<div class="row">
+						<div class="col-sm-12" ng-if="otherTerms.length < 1">
+							<h3 >None</h3>
+						</div>
+						<div class="col-sm-12" ng-if="otherTerms.length >= 1">
+							<dl class="dl-horizontal" ng-repeat="term in otherTerms">
+								<dt ng-bind="term.key"></dt>
+								<dd ng-bind="term.value"></dd>
+							</dl>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<a ng-click="addNew(terms)" class="btn btn-default">Add Terms Agreement</a>
+						</div>
+						<div class="col-sm-6">
+						</div>
+					</div>
+					<div class="row" ng-repeat="term in terms">
+						<div class="col-sm-5">
+							<div class="form-group">
+								<label>Terms Name:</label>
+								<input type="text" class="form-control" ng-model="term.key">
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<div class="form-group">
+								<label>Terms Content User Must Agree To:</label>
+								<textarea class="form-control" rows="8" ng-model="term.value"></textarea>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<a class="btn btn-success btn-sm disabled" ng-if="term.value==='' || term.key===''">Save</a>
+							<a class="btn btn-success btn-sm" ng-click="moveTo(term, terms, otherTerms)" ng-if="(term.value!=='') && (term.key!=='')">Save</a>
+						</div>
+					</div>
+				</accordion-group>
+			</accordion>
+			<br/>
+			<div class="col-sm-12">
+				<div class="form-group">
+					<input type="submit" class="btn btn-primary center-block" value="Create Recruitment" > 
+				</div>
+			</div>
+		</form>
+	</panel>
+	<p class="error alert alert-warning" ng-show="err" ng-bind-html="err"></p>
+	<p class="success alert alert-success" ng-show="success" ng-bind-html="success"></p>
+
+	<!-- 	<table class="table">
+<thead>
+<tr>
+<th>Council</th>
+<th>Start</th>
+<th>End</th>
+<th>Signup Start</th>
+<th>Signup End</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="recruitment in recruitments">
+<td>{{recruitment.Councils_name}}</td>
+<td>{{recruitment.Recruitments_start | reformatdate:'MM/dd/yyyy'}}</td>
+<td>{{recruitment.Recruitments_end | reformatdate:'MM/dd/yyyy'}}</td>
+<td>{{recruitment.Recruitments_startSignUp | reformatdate:'MM/dd/yyyy'}}</td>
+<td>{{recruitment.Recruitments_endSignUp | reformatdate:'MM/dd/yyyy'}}</td>
+</tr>
+</tbody>
+</table> -->
+
+	<panel panel-class="panel-danger" heading="View / Edit Recruitment">
+		<div class="row">
+			<div class="col-sm-12">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-3 control-label">Select a Recruitment</label>
+						<div class="col-sm-4">
+							<select ng-model="selected" class="form-control" 
+									ng-options="recruitment.Recruitments_start for recruitment in recruitments"
+									ng-change="parseRecs(selected)">
+								<option value="">-- Choose Recruitment --</option>
+							</select>
+						</div>
+						<div class="col-sm-5">
+							<a ng-show="(edit ===false )&&(selected!==undefined)" class="btn btn-default btn-sm" ng-click="edit = true">Edit</a>
+							<a ng-show="edit !==false" class="btn btn-default btn-sm" ng-click="edit = false">Cancel</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row" ng-if="selected!==undefined">
+			<form ng-submit="updateRecruitment()" class="form">
+				<dl class="dl-horizontal">
+					<dt>Sign Up Start Date:</dt>
+					<dd ng-if="edit!==true" ng-bind="selected.Recruitments_startSignUp"></dd>
+					<dd ng-if="edit===true"><input type="date" class="form-control" ng-model="selected.Recruitments_startSignUp"></dd>
+
+					<dt>Sign Up End Date:</dt>
+					<dd ng-if="edit!==true" ng-bind="selected.Recruitments_endSignUp"></dd>
+					<dd ng-if="edit===true"><input type="date" class="form-control" ng-model="selected.Recruitments_endSignUp"></dd>
+
+					<dt>Recruitment Start Date:</dt>
+					<dd ng-if="edit!==true" ng-bind="selected.Recruitments_start"></dd>
+					<dd ng-if="edit===true"><input type="date" class="form-control" ng-model="selected.Recruitments_start"></dd>
+
+					<dt>Recruitment End Date:</dt>
+					<dd ng-if="edit!==true" ng-bind="selected.Recruitments_end"></dd>
+					<dd ng-if="edit===true"><input type="date" class="form-control" ng-model="selected.Recruitments_end | date:short"></dd>
+
+					<dt ng-if="selected.recs.requirements.length>0">
+						Other Requirements:
+						<span ng-if="edit===true">
+							<br/><a  class="btn btn-xs btn-success" ng-click="addRec(selected.recs.requirements)">Add <i class="fa fa-plus"></i></a>
+						</span>
+					</dt>
+					<dd>
+						<span ng-repeat="rec in selected.recs.requirements ">
+							<b ng-if="rec.key==='gpa'">Minimum GPA : </b>
+							<b ng-if="rec.key==='units'">Minimum Completed Units (Non-Transfer Student) : </b>
+							<b ng-if="rec.key==='unitsTransfer'">Minimum Completed Units (Transfer Student) : </b>
+							<span ng-if="edit!==true" ng-bind="rec.value"></span>
+							<input ng-if="edit===true" type="text" class="form-control" ng-model="rec.value">
+							<a ng-if="edit===true" class="btn btn-xs btn-danger" ng-click="removeRec($index , selected.recs.requirements)">Remove <i class="fa fa-times"></i></a>
+							<br />
+						</span>
+					</dd>
+					<dt ng-if="selected.recs.otherInfo.length>0">Other Requested Info:</dt>
+					<dd>
+						<span ng-repeat="rec in selected.recs.otherInfo">
+							<b ng-if="rec.key==='studentId'">Student ID#  </b>
+							ex: {{rec.value}} <a ng-if="edit===true" class="btn btn-xs btn-danger" ng-click="removeRec($index , selected.recs.otherInfo)">Remove <i class="fa fa-times"></i></a><br />
+						</span>
+					</dd>
+					<dt ng-if="selected.recs.otherTerms.length>0">Liability and <br />Terms Agreements:</dt>
+					<dd>
+						<span ng-repeat="rec in selected.recs.otherTerms">
+							<span ng-if="!edit">
+							<b>{{rec.key}} : </b>
+							{{rec.value}}<br />
+							</span>
+							<span ng-if="edit">
+						
+								<div class="col-sm-3">
+									<input type="text" class="form-control" ng-model="rec.key" placeholder="Term Name"><br/>
+									<a class="btn btn-xs btn-danger" ng-click="removeRec($index , selected.recs.otherTerms)">Remove <i class="fa fa-times"></i></a>
+								</div>
+								<div class="col-sm-9">
+									<textarea class="form-control" rows="8" ng-model="rec.value" placeholder="Term Details"></textarea>
+								</div>
+								
+							</span>
+							
+							
+						</span>
+					</dd>
+				</dl>
+			</form>
+		</div>
+		
+	</panel>
+</div>
+
+
+
+<!-- <form ng-submit="updateRecruitment()" class="form" ng-if="edit===true">
+	<accordion close-others="oneAtATime" class="panel-danger">
+		<accordion-group is-open="status.isFirstOpen">
+			<accordion-heading>
+				Dates: <span class="text-danger small">Required</span>
+			</accordion-heading>
+
+			<div ng-if="councils.length > 1">
+				<select ng-model="myColor" ng-options="council.Councils_name for council in councils">
+					<option value="">-- Choose Council --</option>
+				</select>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label>Start: </label>
+					<input type="date" class="form-control" ng-model="newRecruitment.Recruitments_start">
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label>End: </label>
+					<input type="date" class="form-control" ng-model="newRecruitment.Recruitments_end">
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label>Signup Start: </label>
+					<input type="date" class="form-control" ng-model="newRecruitment.Recruitments_startSignUp">
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label>Signup End: </label>
+					<input type="date" class="form-control" ng-model="newRecruitment.Recruitments_endSignUp">
+				</div>
+			</div>
+		</accordion-group>
+		<accordion-group >
+			<accordion-heading>
+				Requirements: <span class="text-info small">Optional</span>
+			</accordion-heading>
+			<div class="row">
+				<div class="col-sm-12" ng-if="requirements.length < 1">
+					<h3 >None</h3>
+				</div>
+				<div class="col-sm-12" ng-if="requirements.length >= 1">
+					<dl class="dl-horizontal" ng-repeat="rec in requirements">
+						<dt ng-bind="rec.type"></dt>
+						<dd ng-bind="rec.value"></dd>
+					</dl>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<a ng-click="addRec()" class="btn btn-default">Add New Requirement</a>
+				</div>
+				<div class="col-sm-6">
+				</div>
+			</div>
+			<div class="row" ng-repeat="rec in recs">
+				<div class="col-sm-5">
+					<div class="form-group">
+						<label>Type of Requirement:</label>
+						<select ng-model="rec.type" class="form-control">
+							<option value="gpa">Minimum GPA</option>
+							<option value="units">Minimum Units Completed (Non Transfer)</option>
+							<option value="unitsTransfer">Minimum Units Completed (Transfer)</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-5">
+					<div class="form-group">
+						<label>Minimum Value</label>
+						<input type="text" class="form-control" ng-model="rec.value">
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<a class="btn btn-success btn-sm disabled" ng-if="rec.value==='' || rec.type===''">Save</a>
+					<a class="btn btn-success btn-sm" ng-click="saveRec(rec)" ng-if="rec.value!=='' && rec.type!==''">Save</a>
+				</div>
+			</div>
+		</accordion-group>
+		<accordion-group >
+			<accordion-heading>
+				Additional User Info: <span class="text-info small">Optional</span>
+			</accordion-heading>
+			<div class="row">
+				<div class="col-sm-12" ng-if="otherInfo.length < 1">
+					<h3 >None</h3>
+				</div>
+				<div class="col-sm-12" ng-if="otherInfo.length >= 1">
+					<dl class="dl-horizontal" ng-repeat="info in otherInfo">
+						<dt ng-bind="info.name"></dt>
+						<dd ng-bind="info.value"></dd>
+					</dl>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<a ng-click="addInfo()" class="btn btn-default">Additional Form Field</a>
+				</div>
+				<div class="col-sm-6">
+				</div>
+			</div>
+			<div class="row" ng-repeat="info in infos">
+				<div class="col-sm-5">
+					<div class="form-group">
+						<label>Information Field:</label>
+						<select ng-model="info.name" class="form-control">
+							<option value="studentId">Student ID#</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-5">
+					<div class="form-group">
+						<label>Example Value:</label>
+						<input type="text" class="form-control" ng-model="info.value">
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<a class="btn btn-success btn-sm disabled" ng-if="info.value==='' || info.name===''">Save</a>
+					<a class="btn btn-success btn-sm" ng-click="saveInfo(info)" ng-if="info.value!=='' && info.name!==''">Save</a>
+				</div>
+			</div>
+		</accordion-group>
+		<accordion-group >
+			<accordion-heading>
+				Include Terms: <span class="text-info small">Optional</span>
+			</accordion-heading>
+			<div class="row">
+				<div class="col-sm-12" ng-if="otherTerms.length < 1">
+					<h3 >None</h3>
+				</div>
+				<div class="col-sm-12" ng-if="otherTerms.length >= 1">
+					<dl class="dl-horizontal" ng-repeat="term in otherTerms">
+						<dt ng-bind="term.name"></dt>
+						<dd ng-bind="term.content"></dd>
+					</dl>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<a ng-click="addTerms()" class="btn btn-default">Add Terms Agreement</a>
+				</div>
+				<div class="col-sm-6">
+				</div>
+			</div>
+			<div class="row" ng-repeat="term in terms">
+				<div class="col-sm-5">
+					<div class="form-group">
+						<label>Terms Name:</label>
+						<input type="text" class="form-control" ng-model="term.name">
+
+					</div>
+				</div>
+				<div class="col-sm-5">
+					<div class="form-group">
+						<label>Terms Content User Must Agree To:</label>
+						<textarea class="form-control" rows="8" ng-model="term.content"></textarea>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<a class="btn btn-success btn-sm disabled" ng-if="term.content==='' || term.name===''">Save</a>
+					<a class="btn btn-success btn-sm" ng-click="saveTerm(term)" ng-if="(term.content!=='') && (term.name!=='')">Save</a>
+				</div>
+			</div>
+		</accordion-group>
+	</accordion>
+	<br/>
+	<div class="col-sm-12">
+		<div class="form-group">
+			<input type="submit" class="btn btn-primary center-block" value="Create Recruitment" > 
+		</div>
+	</div>
+</form> -->

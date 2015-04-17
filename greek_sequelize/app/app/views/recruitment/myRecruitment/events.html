@@ -1,0 +1,106 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/myRecruitment/dash">myRecruitment</a></li>
+		<li class="active">Events</li>
+	</ol>
+
+	<h1>Events</h1>
+
+</div>
+<div class="container">
+	<panel panel-class="panel-danger" heading="Create Recruitment Event">
+		<form class="form-horizontal">
+			<fieldset>
+				<div class="col-sm-8">
+					<div class="form-group">
+						<label class="control-label col-sm-3">Event Name :</label>
+						<div class="col-sm-9">
+							<input ng-model="event.name" class="form-control " type="text">
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="#" class="col-md-3 control-label">Date :</label>
+						<div class="col-md-6">
+							<datepicker ng-model="event.date" ng-change="changeDate()" min-date="minDate" show-weeks="false" class="datepicker"></datepicker>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Start Time :</label>
+						<div class="col-sm-6">
+							<div class="input-group">
+								<timepicker ng-model="event.start" ng-change="changeStart()" hour-step="1" minute-step="1" meridians="['AM', 'PM']" class="timepicker"></timepicker>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">End Time :</label>
+						<div class="col-sm-6">
+							<div class="input-group">
+								<timepicker ng-model="event.end" ng-change="changeEnd()" hour-step="1" minute-step="1" show-meridian="ismeridian" class="timepicker"></timepicker>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<div class="form-group">
+						<label class="control-label col-sm-3">Event Description :</label>
+						<div class="col-sm-9">
+							<textarea ng-model="event.description" class="form-control"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-7">
+					<div class="form-group">
+						<label class="control-label col-sm-5">Event Contact Info :</label>
+						<label class="radio-inline">
+							<input  type="radio" ng-model="contact" value="me" ng-click="assignContactMe()"> My Info
+						</label>
+						<label class="radio-inline">
+							<input  type="radio" ng-model="contact" value="other"> Someone Else
+						</label>
+					</div>
+				</div>
+				<div class="col-sm-5">
+					<div class="form-group">
+						<label class="control-label col-sm-6">Event Code :</label>
+						<div class="col-sm-6">
+							<input ng-model="event.code" class="form-control " type="text">
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12" ng-if="contact==='other'">
+					<div class="form-group">
+						<label class="control-label col-sm-3">Name :</label>
+						<div class="col-sm-9">
+							<input ng-model="other.name" class="form-control " type="text" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-3">Email :</label>
+						<div class="col-sm-9">
+							<input ng-model="other.email" class="form-control " type="email" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-3">Phone :</label>
+						<div class="col-sm-9">
+							<input class="form-control" data-ng-model="other.phone" maskinput data-inputmask="'mask':'(999) 999-9999'" required/>
+						</div>
+					</div>
+					<div class="form-group">
+						<a class="btn btn-orange" ng-click="assignContact(other)">Assign Contact</a>
+					</div>
+				</div>
+				
+
+			</fieldset>
+		</form>
+		{{event}}
+	</panel>
+</div>
+

@@ -1,0 +1,152 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/home">Dashboard</a></li>
+		<li class="active">Exec Dashboard</li>
+	</ol>
+
+	<h1>Exec Dashboard</h1>
+
+</div>
+<div class="container">
+	<tabset panel-tabs="true" panel-class="panel panel-danger" heading="Assign Chapter Roles">
+		<tab heading="Recruitment Team">
+			<div class="col-sm-6">
+				<form class="form" data-ng-submit="assignChair(assign)" novalidate>
+					<div class="form-group">
+						<select class="form-control" ng-model="assign" multiple >
+							<option  ng-repeat="user in actives" ng-value="user.Users_id">{{user.Users_firstname}} {{user.Users_lastname}}</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-xs-12">
+								<input ng-hide="assign===undefined" type="submit"  class="btn btn-primary btn-block" value="Assign" > 
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-6">
+				<form class="form" data-ng-submit="unassignChair(unassign)">
+					<div class="form-group">
+						<select class="form-control" ng-model="unassign" multiple >
+							<option  ng-repeat="user in chairs" ng-value="user.Users_id">{{user.Users_firstname}} {{user.Users_lastname}}</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-xs-12">
+								<input ng-hide="unassign===undefined" type="submit" class="btn btn-warning btn-block" value="Unassign" > 
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</tab>
+		<tab heading="Other">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Phone #</th>
+						<th>Date</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="request in chapterRequests" ng-if="request.ChapterRequests_status ==='approved'">
+						<td>
+
+						</td>
+						<td>
+							<span ng-bind="request.Users_firstname+' '+request.Users_lastname">Name</span>
+						</td>
+						<td>
+							<span ng-bind="request.Users_email">Email</span>
+						</td>
+						<td>
+							<span ng-bind="request.Users_phone">Phone</span>
+						</td>
+						<td>
+							<span ng-bind="request.ChapterRequests_updated | date">Requested</span>
+						</td>
+						<td>
+							<a class="btn btn-success btn-xs" ng-click="approve(request.ChapterRequests_id)">
+								<i class="fa fa-thumbs-up"></i></a>
+							<a class="btn btn-danger btn-xs" ng-click="deny(request.ChapterRequests_id)">
+								<i class="fa fa-thumbs-down"></i>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</tab>
+<!-- 		<tab heading="Position">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Phone #</th>
+						<th>Date</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="request in chapterRequests" ng-if="request.ChapterRequests_status ==='rejected'">
+						<td>
+
+						</td>
+						<td>
+							<span ng-bind="request.Users_firstname+' '+request.Users_lastname">Name</span>
+						</td>
+						<td>
+							<span ng-bind="request.Users_email">Email</span>
+						</td>
+						<td>
+							<span ng-bind="request.Users_phone">Phone</span>
+						</td>
+						<td>
+							<span ng-bind="request.ChapterRequests_updated | date">Requested</span>
+						</td>
+						<td>
+							<a class="btn btn-success btn-xs" ng-click="approve(request.ChapterRequests_id)">
+								<i class="fa fa-thumbs-up"></i></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</tab> -->
+	</tabset>
+<!-- 	<panel panel-class="panel-danger" heading="Up Coming Events">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Event</th>
+					<th>When</th>
+					<th>Where</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="event in events">
+					<td>
+						<span ng-bind="event.Events_name"></span>
+					</td>
+					<td>
+						<span ng-bind="event.Events_start | date:short"></span>
+					</td>
+					<td>
+						<span ng-bind="event.Events_description"></span>
+					</td>
+					<td>
+						<a class="btn btn-info" >Details</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</panel> -->
+</div>

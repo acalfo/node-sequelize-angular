@@ -1,0 +1,94 @@
+<div class="container panel panel-midnightblue ">
+	<div class="panel-heading">
+		<h4 class="panel-title">Personal Info</h4>
+	</div>
+	<div class="form-horizontal panel-body">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="col-sm-5">
+					<img ng-src="{{userCopy.Users_profpic}}" alt="" class="pull-left" style="margin: 0 20px 20px 0;max-width:100%">
+					<div class="col-md-12 col-sm-12 col-xs-12" ng-if="edit">                
+						<button class="btn btn-info btn-sm" type="btn" ng-click="pickAndStore()">New Profile Pic</button>  
+					</div>
+
+				</div>
+				<div class="col-sm-7">
+					<alert type="success" ng-show="!!success">
+						{{success}}
+<!-- 						<p><button class="btn btn-success" ng-click="success=false">Okay</button></p> -->
+					</alert>
+					<alert type="info" ng-if="loading">
+						<i class="fa fa-spinner fa-spin"></i> Loading
+					</alert>
+					<form ng-submit="update()">
+						<div class="table-responsive">
+							<table class="table table-condensed">
+								<h3 ng-if="!edit"><strong ng-bind="userCopy.Users_firstname+' '+userCopy.Users_lastname">John Doe</strong></h3>
+	<!-- 							<div class="col-sm-12" ng-if="edit">
+									<div class="col-sm-6">
+										<input class="form-control" ng-model="userCopy.Users_firstname" placeholder="First">
+									</div>
+									<div class="col-sm-6">
+										<input class="form-control" ng-model="userCopy.Users_lastname" placeholder="Last">
+									</div>
+								</div> -->
+								<tbody>
+									<tr ng-if="edit">
+										<td>First Name</td>
+										<td><input class="form-control input-sm" ng-model="userCopy.Users_firstname"></td>
+									</tr>
+									<tr ng-if="edit">
+										<td>Last Name</td>
+										<td><input class="form-control input-sm" ng-model="userCopy.Users_lastname"></td>
+									</tr>
+									<tr>
+										<td>Email</td>
+										<td ng-if="!edit"><span ng-bind="userCopy.Users_email"></span></td>
+										<td ng-if="edit"><input class="form-control input-sm" ng-model="userCopy.Users_email"></td>
+									</tr>
+									<tr>
+										<td>Phone</td>
+										<td ng-if="!edit"><span ng-bind="userCopy.Users_phone"></span></td>
+										<td ng-if="edit"><input class="form-control input-sm" ng-model="userCopy.Users_phone" maskinput data-inputmask="'mask':'(999) 999-9999'"></td>
+									</tr>
+									<tr>
+										<td>Hometown</td>
+										<td ng-if="!edit"><span ng-bind="userCopy.Users_home"></span></td>
+										<td ng-if="edit"><input class="form-control input-sm" ng-model="userCopy.Users_home"></td>
+									</tr>
+									<tr>
+										<td>Year</td>
+										<td ng-if="!edit"><span ng-bind="userCopy.Users_year"></span></td>
+										<td ng-if="edit">
+											<select class="form-control input-sm" data-ng-model="userCopy.Users_year" required>
+												<option value="freshman">
+													FRESHMAN
+												</option>
+												<option value="sophomore">
+													SOPHOMORE
+												</option>
+												<option value="junior">
+													JUNIOR
+												</option>
+												<option value="senior">
+													SENIOR
+												</option>
+											</select>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="col-sm-12">
+							<a ng-hide="edit" class="btn btn-sm btn-orange" ng-click="edit = true">Edit Info <i class="fa fa-edit"></i></a>
+							<button ng-hide="!edit" class="btn btn-sm btn-primary">Save Info <i class="fa fa-save"></i></button>
+							<a ng-hide="!edit" class="btn btn-sm btn-default" ng-click="reset()">Cancel <!--<i class="fa fa-undo"></i>--></a>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</div>

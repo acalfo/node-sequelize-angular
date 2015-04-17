@@ -1,0 +1,51 @@
+<!-- <div class="container" ng-controller="UniversityCtrl" ng-init="getUniversities()">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>University</th>
+				<th>View</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="uni in universities">
+				<td><img ng-src="{{uni.Universities_logo}}" style="max-width:80px"/></td>
+				<td>{{uni.Universities_name}}</td>
+				<td><a class="btn btn-block btn-default" href="#/universities/{{uni.Universities_id}}">View</a></td>
+				
+			</tr>
+		</tbody>
+	</table>
+</div> -->
+
+<!-- <div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/fome">Dashboard</a></li>
+
+		<li class="active">Universities</li>
+	</ol>
+
+	<h1>Universities</h1>
+
+</div> -->
+<div class="container">
+	<panel panel-class="panel-danger" heading="Universities">
+		<table class="table">
+<!-- 		<thead>
+			<tr>
+				<th>#</th>
+				<th>University</th>
+				<th>View</th>
+			</tr>
+		</thead> -->
+		<tbody>
+			<tr ng-repeat="uni in universities">
+				<td><img ng-src="{{uni.Universities_logo}}" style="max-width:80px"/></td>
+				<td>{{uni.Universities_name}}</td>
+				<td><a class="btn btn-block btn-default" href="#/universities/{{uni.Universities_id}}">View</a></td>
+			</tr>
+		</tbody>
+	</table>
+	</panel>
+</div>
